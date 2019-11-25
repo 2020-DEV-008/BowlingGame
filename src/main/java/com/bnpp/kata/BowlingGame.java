@@ -6,10 +6,23 @@ public class BowlingGame {
 	private int[] rollScore = new int[22];
 	private int rollCount;
 
-	public static void main(String[] args) {
-		BowlingGame game = new BowlingGame();
-		game.callRollUsingArrayOfPins(2, 2, 2);
-		System.out.println(game.calculateGameScore());
+	public static void main(String[] rollPins) {
+		if (null != rollPins && rollPins.length > 0) {
+			BowlingGame game = new BowlingGame();
+			for (String pins : rollPins) {
+				if("/".contentEquals(pins)) {
+					game.roll(0);
+				} else {
+					game.roll(Integer.parseInt(pins));
+				}
+			}
+			System.out.print("Total Game Score for given input is: " + game.calculateGameScore());
+		} else {
+			System.out.println("Pass your inputs in commanline argument with space seperated.");
+			System.out.println("Please give / to immediate next roll when there is strike as shown below");
+			System.out.println("\tjava com.bnpp.kata.BowlingGame 10 / 3 2");
+			System.out.println("\nNote: Assumption is all your inputs are valid");
+		}
 	}
 
 	void callRollUsingArrayOfPins(int... pins) {
