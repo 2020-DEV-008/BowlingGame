@@ -3,6 +3,9 @@ package com.bnpp.kata;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -100,6 +103,27 @@ public class BowlingGameTest {
 		int gameScore = game.calculateGameScore();
 
 		assertEquals(6, gameScore);
+	}
+
+	@Test
+	public void callMainMethodWithArugumentsShouldBeAbleToCalculateGameScore() {
+		String[] inputPins = { "10", "2", "2" };
+
+		PrintStream actualStream = System.out;
+		ByteArrayOutputStream outContent = setTemporaryPrintStreamToTest();
+
+		BowlingGame.main(inputPins);
+
+		System.setOut(actualStream);
+
+		assertEquals("Total Game Score for given input is: 18", outContent.toString());
+	}
+
+	private ByteArrayOutputStream setTemporaryPrintStreamToTest() {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		PrintStream testStream = new PrintStream(outContent);
+		System.setOut(testStream);
+		return outContent;
 	}
 
 	private void rollMany(final int numberOfRolls, final int numberOfPinsKnocked) {
