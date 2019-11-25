@@ -109,15 +109,21 @@ public class BowlingGameTest {
 	public void callMainMethodWithArugumentsShouldBeAbleToCalculateGameScore() {
 		String[] inputPins = { "10", "2", "2" };
 
-		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-		PrintStream testStream = new PrintStream(outContent);
 		PrintStream actualStream = System.out;
-		System.setOut(testStream);
+		ByteArrayOutputStream outContent = setTemporaryPrintStreamToTest();
 
 		BowlingGame.main(inputPins);
+
 		System.setOut(actualStream);
-		
+
 		assertEquals("Total Game Score for given input is: 18", outContent.toString());
+	}
+
+	private ByteArrayOutputStream setTemporaryPrintStreamToTest() {
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+		PrintStream testStream = new PrintStream(outContent);
+		System.setOut(testStream);
+		return outContent;
 	}
 
 	private void rollMany(final int numberOfRolls, final int numberOfPinsKnocked) {
