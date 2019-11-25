@@ -7,21 +7,12 @@ public class BowlingGame {
 	private int rollCount;
 
 	public static void main(String[] rollPins) {
-		if (null != rollPins && rollPins.length > 0) {
+		if (isValidArguments(rollPins)) {
 			BowlingGame game = new BowlingGame();
-			for (String pins : rollPins) {
-				if("/".contentEquals(pins)) {
-					game.roll(0);
-				} else {
-					game.roll(Integer.parseInt(pins));
-				}
-			}
+			converToIntAndCallRoll(rollPins, game);
 			System.out.print("Total Game Score for given input is: " + game.calculateGameScore());
 		} else {
-			System.out.println("Pass your inputs in commanline argument with space seperated.");
-			System.out.println("Please give / to immediate next roll when there is strike as shown below");
-			System.out.println("\tjava com.bnpp.kata.BowlingGame 10 / 3 2");
-			System.out.println("\nNote: Assumption is all your inputs are valid");
+			printInfoWhenNoArgumentsFound();
 		}
 	}
 
@@ -45,6 +36,27 @@ public class BowlingGame {
 	void roll(final int numberOfpinsKnocked) {
 		rollScore[rollCount++] = numberOfpinsKnocked;
 		moveToNextFrameWhenStrikeAchieved(numberOfpinsKnocked);
+	}
+
+	private static boolean isValidArguments(String[] rollPins) {
+		return null != rollPins && rollPins.length > 0;
+	}
+
+	private static void converToIntAndCallRoll(String[] rollPins, BowlingGame game) {
+		for (String pins : rollPins) {
+			if ("/".contentEquals(pins)) {
+				game.roll(0);
+			} else {
+				game.roll(Integer.parseInt(pins));
+			}
+		}
+	}
+
+	private static void printInfoWhenNoArgumentsFound() {
+		System.out.println("Pass your inputs in commanline argument with space seperated.");
+		System.out.println("Please give / to immediate next roll when there is strike as shown below");
+		System.out.println("\tjava com.bnpp.kata.BowlingGame 10 / 3 2");
+		System.out.println("\nNote: Assumption is all your inputs are valid");
 	}
 
 	private void moveToNextFrameWhenStrikeAchieved(final int numberOfpinsKnocked) {
