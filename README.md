@@ -33,6 +33,18 @@ Right click project in Project Explorer window and select Run As -> Maven instal
 
 Once above steps done open <b>BowlingGameTest</b> class and right click file and choose Run As -> JUnit Test
 ```
+# To run the application Using command line
+```
+After successful maven build
+Goto <ProjectDirectory>\target\classes
+and execute below command
+java com.bnpp.kata.BowlingGame 10 / 2 2
+```
+```
+Note:
+Give your inputs with space seperated shown in example above.
+And assumption is all your inputs are valid. 
+```
 # To run the application Using eclipse with main method
 ```
   public static void main(String[] args) {
