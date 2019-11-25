@@ -38,7 +38,7 @@ Once above steps done open <b>BowlingGameTest</b> class and right click file and
 After successful maven build
 Goto <ProjectDirectory>\target\classes
 and execute below command
-java com.bnpp.kata.BowlingGame 10 / 2 2
+java -classpath .\ com.bnpp.kata.BowlingGame 2 2 2 2
 ```
 ```
 Note:
